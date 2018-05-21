@@ -1,10 +1,11 @@
 package model
 
 import (
-	"gopkg.in/mgo.v2"
+	"errors"
 	"fmt"
+
+	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
-	"github.com/iris-contrib/errors"
 )
 
 const (
@@ -25,12 +26,12 @@ func init() {
 	//defer Sess.Close()
 	Sess.SetMode(mgo.Monotonic, true)
 	Sess.Ping()
-	fmt.Println("MongoDB connected");
+	fmt.Println("MongoDB connected")
 }
 
-func IsValidID(id string) (error) {
+func IsValidID(id string) error {
 	if !bson.IsObjectIdHex(id) {
-		return errors.New("ID is not a valid value.")
+		return errors.New("id is not a valid value")
 	}
 	return nil
 }

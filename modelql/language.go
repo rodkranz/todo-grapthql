@@ -2,8 +2,9 @@ package modelql
 
 import (
 	"github.com/graphql-go/graphql"
-	"github.com/rodlps22/todo-grapthql/model"
-	"github.com/rodlps22/todo-grapthql/module/convert"
+
+	"github.com/rodkranz/todo-grapthql/model"
+	"github.com/rodkranz/todo-grapthql/module/convert"
 )
 
 var LanguageType = graphql.NewObject(graphql.ObjectConfig{
@@ -20,7 +21,7 @@ var LanguageType = graphql.NewObject(graphql.ObjectConfig{
 
 func LanguageQl() *graphql.Field {
 	return &graphql.Field{
-		Type: LanguageType,
+		Type:        LanguageType,
 		Description: "Get one language by id",
 		Args: graphql.FieldConfigArgument{
 			"id": &graphql.ArgumentConfig{
@@ -28,7 +29,7 @@ func LanguageQl() *graphql.Field {
 			},
 		},
 		Resolve: func(params graphql.ResolveParams) (interface{}, error) {
-			id,    _    := params.Args["id"].(string)
+			id, _ := params.Args["id"].(string)
 			result, err := model.FindLanguageById(id)
 			if err != nil {
 				return nil, err
@@ -51,7 +52,7 @@ func LanguageListQl() *graphql.Field {
 		Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 			var count int = 0
 			if pFirst, isOK := params.Args["limit"].(int); isOK {
-				count = pFirst;
+				count = pFirst
 			}
 
 			result, err := model.FindAllLanguages(count)
@@ -62,7 +63,7 @@ func LanguageListQl() *graphql.Field {
 
 func CreateLanguage() *graphql.Field {
 	return &graphql.Field{
-		Type: LanguageType,
+		Type:        LanguageType,
 		Description: "Create new language",
 		Args: graphql.FieldConfigArgument{
 			"name": &graphql.ArgumentConfig{
@@ -85,7 +86,7 @@ func CreateLanguage() *graphql.Field {
 
 func UpdateLanguage() *graphql.Field {
 	return &graphql.Field{
-		Type: TodoType,
+		Type:        TodoType,
 		Description: "Update language",
 		Args: graphql.FieldConfigArgument{
 			"id": &graphql.ArgumentConfig{
@@ -114,7 +115,7 @@ func UpdateLanguage() *graphql.Field {
 
 func DeleteLanguage() *graphql.Field {
 	return &graphql.Field{
-		Type: TodoType,
+		Type:        TodoType,
 		Description: "Delete language by id",
 		Args: graphql.FieldConfigArgument{
 			"id": &graphql.ArgumentConfig{

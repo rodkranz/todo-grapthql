@@ -1,12 +1,13 @@
 package modelql
 
 import (
-	"github.com/graphql-go/graphql"
 	"fmt"
+
+	"github.com/graphql-go/graphql"
 )
 
 var rootQuery = graphql.NewObject(graphql.ObjectConfig{
-	Name: "RootQuery",
+	Name:        "RootQuery",
 	Description: "List methods",
 	Fields: graphql.Fields{
 		/*
@@ -31,10 +32,9 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 	},
 })
 
-
 // root mutation
 var rootMutation = graphql.NewObject(graphql.ObjectConfig{
-	Name: "RootMutation",
+	Name:        "RootMutation",
 	Description: "Change methods",
 	Fields: graphql.Fields{
 		/*
@@ -73,5 +73,3 @@ func ExecuteQuery(query string, schema graphql.Schema) *graphql.Result {
 
 	return result
 }
-
-

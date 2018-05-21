@@ -5,11 +5,11 @@ import (
 )
 
 type Todo struct {
-	ID       bson.ObjectId   `json:"id"       bson:"_id,omitempty"`
-	Text     string          `json:"text"     bson:"text"`
-	Done     bool            `json:"done"     bson:"done"`
-	LangId   string                          `bson:"langId"`
-	Language *Language       `json:"language" bson:"language"`
+	ID       bson.ObjectId `json:"id"       bson:"_id,omitempty"`
+	Text     string        `json:"text"     bson:"text"`
+	Done     bool          `json:"done"     bson:"done"`
+	LangId   string        `bson:"langId"`
+	Language *Language     `json:"language" bson:"language"`
 }
 
 func (t *Todo) HasID() bool {
@@ -73,7 +73,7 @@ func UpdateTodo(editTodo *Todo) error {
 }
 
 func DeleteTodoById(id string) (*Todo, error) {
-	todo, has := FindTodoById(id);
+	todo, has := FindTodoById(id)
 	if has != nil {
 		return todo, has
 	}

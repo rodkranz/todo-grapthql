@@ -1,14 +1,14 @@
 package main
 
 import (
-	"os"
-	"time"
-	"runtime"
 	"math/rand"
-	
-	"github.com/codegangsta/cli"
-	
-	"github.com/rodlps22/todo-grapthql/cmd"
+	"os"
+	"runtime"
+	"time"
+
+	"github.com/urfave/cli"
+
+	"github.com/rodkranz/todo-grapthql/cmd"
 )
 
 const APP_VER = "v0.0.1"

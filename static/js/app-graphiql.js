@@ -51,7 +51,7 @@ $(function (global) {
         var toolbar = React.createElement(GraphiQL.Toolbar, {}, [
             "Source available at ",
             React.createElement("a", {
-                href: "https://github.com/rodlps22/todo-grapthql"
+                href: "https://github.com/rodkranz/todo-grapthql"
             }, "github")
         ]);
         React.render(

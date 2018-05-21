@@ -2,8 +2,9 @@ package modelql
 
 import (
 	"github.com/graphql-go/graphql"
-	"github.com/rodlps22/todo-grapthql/model"
-	"github.com/rodlps22/todo-grapthql/module/convert"
+
+	"github.com/rodkranz/todo-grapthql/model"
+	"github.com/rodkranz/todo-grapthql/module/convert"
 )
 
 var TodoType = graphql.NewObject(graphql.ObjectConfig{
@@ -26,7 +27,7 @@ var TodoType = graphql.NewObject(graphql.ObjectConfig{
 
 func TodoQl() *graphql.Field {
 	return &graphql.Field{
-		Type: TodoType,
+		Type:        TodoType,
 		Description: "get todo by id",
 		Args: graphql.FieldConfigArgument{
 			"id": &graphql.ArgumentConfig{
@@ -65,7 +66,7 @@ func TodoListQl() *graphql.Field {
 			where := make(map[string]interface{})
 
 			if pLang, isOK := params.Args["lang"].(string); isOK {
-				lang, err := model.FindLanguageByName(pLang);
+				lang, err := model.FindLanguageByName(pLang)
 				if err != nil {
 					return nil, err
 				}
@@ -74,12 +75,12 @@ func TodoListQl() *graphql.Field {
 			}
 
 			if pDone, isOK := params.Args["isDone"].(bool); isOK {
-				where["done"] = pDone;
+				where["done"] = pDone
 			}
 
 			var count int = 0
 			if pFirst, isOK := params.Args["limit"].(int); isOK {
-				count = pFirst;
+				count = pFirst
 			}
 
 			results, err := model.FindAllTodo(where, count)
@@ -93,7 +94,7 @@ func TodoListQl() *graphql.Field {
 
 func CreateTodo() *graphql.Field {
 	return &graphql.Field{
-		Type: TodoType, // the return type for this field
+		Type:        TodoType, // the return type for this field
 		Description: "Create new todo",
 		Args: graphql.FieldConfigArgument{
 			"text": &graphql.ArgumentConfig{
@@ -129,7 +130,7 @@ func CreateTodo() *graphql.Field {
 
 func UpdateTodo() *graphql.Field {
 	return &graphql.Field{
-		Type: TodoType,
+		Type:        TodoType,
 		Description: "Update todo by id",
 		Args: graphql.FieldConfigArgument{
 			"id": &graphql.ArgumentConfig{
@@ -172,7 +173,7 @@ func UpdateTodo() *graphql.Field {
 
 func DeleteTodo() *graphql.Field {
 	return &graphql.Field{
-		Type: TodoType,
+		Type:        TodoType,
 		Description: "Delete todo by id",
 		Args: graphql.FieldConfigArgument{
 			"id": &graphql.ArgumentConfig{

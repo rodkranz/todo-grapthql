@@ -9,7 +9,6 @@ type Language struct {
 	Name string        `json:"text" bson:"name"`
 }
 
-
 func (l *Language) HasID() bool {
 	return l.ID.Valid()
 }
@@ -37,17 +36,16 @@ func FindLanguageById(id string) (*Language, error) {
 		return result, err
 	}
 
-	c   := Sess.DB(DB_NAME).C(TABLE_LANGUAGE)
+	c := Sess.DB(DB_NAME).C(TABLE_LANGUAGE)
 	err := c.FindId(bson.ObjectIdHex(id)).One(result)
 
 	return result, err
 }
 
-
 func FindLanguageByName(name string) (*Language, error) {
 	result := new(Language)
 
-	c   := Sess.DB(DB_NAME).C(TABLE_LANGUAGE)
+	c := Sess.DB(DB_NAME).C(TABLE_LANGUAGE)
 	err := c.Find(bson.M{"name": name}).One(result)
 
 	return result, err
@@ -67,21 +65,17 @@ func UpdateLanguage(editLanguage *Language) error {
 	c := Sess.DB(DB_NAME).C(TABLE_LANGUAGE)
 
 	colQuery := bson.M{"_id": editLanguage.ID}
-	change   := bson.M{"$set": bson.M{"name": editLanguage.Name}}
+	change := bson.M{"$set": bson.M{"name": editLanguage.Name}}
 
 	return c.Update(colQuery, change)
 }
 
 func DeleteLanguageById(id string) (*Language, error) {
-	todo, has := FindLanguageById(id);
+	todo, has := FindLanguageById(id)
 	if has != nil {
 		return todo, has
 	}
 
 	c := Sess.DB(DB_NAME).C(TABLE_LANGUAGE)
 	return todo, c.Remove(bson.M{"_id": bson.ObjectIdHex(id)})
-}
-
-func DeleteLanguage(deleteLanguage *Language) (*Language, error) {
-	return DeleteLanguageById(deleteLanguage.GetID())
 }
